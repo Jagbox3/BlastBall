@@ -6,23 +6,19 @@
   
   <body bgcolor=white>
 
-    <p>Testd Paragraph</p>
+    <p>Blast Ball</p>
 
   </body>
   
   <script>
     
-    var cxt = document.body;
+    window.open("meat", "myWindow", "width=400, height=200");
     
-    createButton();
+    var canvas = document.createElement('canvas');
+    canvas.id     = "CursorLayer";
+    canvas.width  = 1224;
+    canvas.height = 768;
     
-    function createButton(){
-    var button = document.createElement("input");
-    button.type = "button";
-    button.value = "im a button";
-    button.onclick = createButton();
-    cxt.appendChild(button);
-  }
     
   </script>
   
