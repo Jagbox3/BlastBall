@@ -12,10 +12,17 @@
   
   <script>
     
-    var btn = document.createElement("BUTTON");
-    var text = document.createTextNode("Sample Button");
-    btn.appendChild(text);
-    document.body.appendChild(btn);
+    var cxt = document.getContext("2d");
+    createButton();
+    
+    function createButton{
+    var button = document.createElement("input");
+    button.type = "button";
+    button.value = "im a button";
+    button.onclick = createButton();
+    context.appendChild(button);
+  }
     
   </script>
+  
 </html>
