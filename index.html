@@ -12,7 +12,8 @@
   
   <script>
     
-    var cxt = document.getContext("2d");
+    var cxt = document.body;
+    
     createButton();
     
     function createButton{
@@ -20,7 +21,7 @@
     button.type = "button";
     button.value = "im a button";
     button.onclick = createButton();
-    context.appendChild(button);
+    cxt.appendChild(button);
   }
     
   </script>
