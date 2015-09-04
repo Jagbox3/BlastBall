@@ -13,7 +13,10 @@
   <body>
   
   <script>
-    
+  
+  init();
+  
+    function init(){
     var canvas = document.createElement('canvas');
     canvas.id     = "canvas";
     canvas.width  = window.innerWidth - 20;
@@ -22,6 +25,7 @@
     var ctx = canvas.getContext("2d");
     ctx.fillStyle = "#C0C0C0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
     
   </script>
   
