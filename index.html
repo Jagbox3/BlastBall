@@ -12,10 +12,6 @@
   </head>
   <body>
     
-    <style backGroundColor = "#FF0000">
-      
-    </style>
-    
   </body>
   
   <script>
@@ -25,6 +21,9 @@
     canvas.width  = window.innerWidth - 20;
     canvas.height = window.innerHeight - 20;
     document.body.appendChild(canvas);
+    var ctx = x.getContext("2d");
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(canvas.width, canvas.height, 150, 100);
     
   </script>
   
