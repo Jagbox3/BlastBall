@@ -1,1 +1,28 @@
-Hello World
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="1200" height="1200" style="border:1px solid #d3d3d3;" onmousemove="move(event)">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.arc(50, 50, 50, 0, 2 * Math.PI);
+ctx.fill();
+ctx.closePath();
+
+function move(event){
+ctx.clearRect(0,0,1200,1200);
+var c = document.getElementById("myCanvas");
+ctx.beginPath();
+ctx.arc(event.clientX, event.clientY, 50, 0, 2 * Math.PI);
+ctx.fill();
+ctx.closePath();
+}
+
+</script> 
+
+</body>
+</html>
