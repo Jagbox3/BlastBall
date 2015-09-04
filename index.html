@@ -19,12 +19,12 @@
     canvas.width  = window.innerWidth - 20;
     canvas.height = window.innerHeight - 20;
     document.body.appendChild(canvas);
-    var ctx = x.getContext("2d");
+    var ctx = canvas.getContext("2d");
     ctx.fillStyle = "#FF0000";
-    ctx.fillRect(canvas.width, canvas.height, 150, 100);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     
   </script>
   
-    </body>
-  
+  </body>
+
 </html>
