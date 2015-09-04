@@ -16,7 +16,7 @@
   
   init();
   
-    function init(){
+  function init(){
     var canvas = document.createElement('canvas');
     canvas.id     = "canvas";
     canvas.width  = window.innerWidth - 20;
@@ -25,7 +25,22 @@
     var ctx = canvas.getContext("2d");
     ctx.fillStyle = "#C0C0C0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
+    ctx.beginPath();
+    ctx.arc(50, 50, 50, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+  }
+  
+  
+
+  function move(event){
+    ctx.clearRect(0,0,1200,1200);
+    var c = document.getElementById("myCanvas");
+    ctx.beginPath();
+    ctx.arc(event.clientX, event.clientY, 50, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+  }
     
   </script>
   
