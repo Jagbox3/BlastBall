@@ -21,6 +21,7 @@
     canvas.id     = "canvas";
     canvas.width  = window.innerWidth - 20;
     canvas.height = window.innerHeight - 20;
+    canvas.onmousemove = move(event);
     document.body.appendChild(canvas);
     var ctx = canvas.getContext("2d");
     ctx.fillStyle = "#C0C0C0";
