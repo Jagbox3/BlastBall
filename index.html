@@ -47,6 +47,7 @@
     if(bomb.yVel <= .5){
       bomb.yVel *= -1;
     }
+    bomb.yVel *= 5;
     
     //start game
     var timerID = setInterval(function(){
@@ -58,17 +59,29 @@
     console.log("Initialized");
   }
 
-  function move(event){
+  function move(event){ //Player movement
     if(initialized){
       thisPlayer.x = event.clientX;
       thisPlayer.y = event.clientY;
     }
-
   }
   
-  function moveCircle(){
+  function moveCircle(){ //Bomb movement
     bomb.x += bomb.xVel;
     bomb.y += bomb.yVel;
+  }
+  
+  function manageHitboxes(){
+    if(bomb.x <= 0){
+      bomb.xVel = Math.random() * 5;
+    } else if (bomb.x + (bomb.size/2) >= canvas.width){
+      bomb.xVel = Math.random() * -5;
+    }
+    if(bomb.y <= 0){
+      bomb.yVel = Math.random() * 5;
+    } else if(bomb.y + (bomb.size/2) >= canvas.height){
+      bomb.yVel = Math.random() * -5;
+    }
   }
   
   function draw(){
