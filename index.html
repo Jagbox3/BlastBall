@@ -62,6 +62,9 @@
   
   function timeCounter(){
     gameState.score += .1;
+    if(gameState.score % 25 && !thisPlayer.size > 200){
+      thisPlayer.size += 1;
+    }
   }
 
   function move(event){ //Player movement
