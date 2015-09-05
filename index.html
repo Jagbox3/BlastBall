@@ -64,7 +64,7 @@
   
   function timeCounter(){
     gameState.score += .1;
-    if(gameState.score % 25 <= 0.4 && thisPlayer.size <= 200){
+    if(gameState.score % 25 <= 0.2 && thisPlayer.size <= 120){
       thisPlayer.size += 1;
       console.log("howdy");
     }
@@ -163,7 +163,7 @@
     bomb = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
-      xVel: 0, yVel: 0, maxVel: 5, inc: 2
+      xVel: 0, yVel: 0, maxVel: 5, inc: 0.2
     };
     
     thisPlayer = {
