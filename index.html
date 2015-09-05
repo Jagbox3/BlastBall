@@ -42,10 +42,12 @@
     //ctx.fill();
     //ctx.closePath();
     initialized = true;
+    alert("init");
   }
 
   function move(event){
     if(initialized){
+      alert("hi");
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     ctx.fillStyle = "#FF0000"
