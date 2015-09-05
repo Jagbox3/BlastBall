@@ -23,6 +23,7 @@
   var bomb;
   var thisPlayer;
   var ctx;
+  var sideM;
   
   initObjects();
   init();
@@ -37,18 +38,7 @@
     draw();
     
     //init bomb movement
-    bomb.xVel = Math.random();
-    while(bomb.xVel > 0.75){
-      bomb.xVel = Math.random();
-    }
-    bomb.xVel * bomb.maxVel;
-    var coin = Math.random();
-    if(coin > 0.5){
-      bomb.xVel * -1;
-      bomb.yVel = bomb.maxVel + bomb.xVel;
-    } else {
-    bomb.yVel = bomb.maxVel - bomb.xVel;
-    }
+    bombMovement();
     
     //start game
     timerID = setInterval(function(){
@@ -84,23 +74,31 @@
   
   function manageHitboxes(){
     if(bomb.x <= 0){ //Left
-      bomb.xVel *= -1;
-      if(bomb.yVel >= 0){
-        bomb.yVel += bomb.inc;
+      if(bomb.y >= sideM.ay || bomb.y <= window.innerHeight - sideM.ay){
+        bomb.xVel = bomb.maxVel;
+        bomb.yVel = 0;
       } else {
-        bomb.yVel -= bomb.inc;
+        bomb.xVel *= -1;
+        if(bomb.yVel >= 0){
+          bomb.yVel += bomb.inc;
+        } else {
+          bomb.yVel -= bomb.inc;
+        }
+        bomb.maxVel += bomb.inc;
       }
-      bomb.maxVel += bomb.inc;
       
     } else if (bomb.x + (bomb.diameter/2) >= canvas.width){ //Right
-      bomb.xVel *= -1;
-      if(bomb.yVel >= 0){
-        bomb.yVel += bomb.inc;
+      if(bomb.y >= sideM.ay || bomb.y <= window.innerHeight - sideM.ay){
+          bombMovement(true);
       } else {
-        bomb.yVel -= bomb.inc;
+        bomb.xVel *= -1;
+        if(bomb.yVel >= 0){
+          bomb.yVel += bomb.inc;
+        } else {
+          bomb.yVel -= bomb.inc;
+        }
+        bomb.maxVel += bomb.inc;
       }
-      bomb.maxVel += bomb.inc;
-      
     }
     if(bomb.y <= 0){ //Top
       bomb.yVel *= -1;
@@ -169,6 +167,29 @@
     thisPlayer = {
       x: 0, y: 0, size: 50
     };
+    
+    sideM = {
+      ax: window.innerWidth / 20,
+      bx: window.innerWidth - (window.innerWidth / 10),
+      ay: window.innerHeight / 20,
+      by: window.innerHeight - (window.innerWidth / 10)
+    };
+    
+  }
+  function bombMovement(rightWall){
+    bomb.xVel = Math.random();
+    while(bomb.xVel > 0.75){
+      bomb.xVel = Math.random();
+    }
+    bomb.xVel * bomb.maxVel;
+    var coin = Math.random();
+    console.log(coin);
+    if(coin > 0.5 || rightWall){
+      bomb.xVel *= -1;
+      bomb.yVel = bomb.maxVel + bomb.xVel;
+    } else {
+    bomb.yVel = bomb.maxVel - bomb.xVel;
+    }
   }
     
   </script>
