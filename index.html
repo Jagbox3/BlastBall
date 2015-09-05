@@ -42,13 +42,16 @@
     draw();
     
     //init bomb movement
-    bomb.direction = Math.random() * 360;
+    bomb.xVel = Math.random() * 5;
+    bomb.yVel = Math.random();
+    if(bomb.yVel <= .5){
+      bomb.yVel *= -1;
+    }
     
     //start game
     var timerID = setInterval(function(){
       moveCircle();
       draw();
-      console.log("looped");
     }, 5);
     
     initialized = true;
