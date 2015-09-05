@@ -22,24 +22,13 @@
     time: 0
   };
   var canvas = document.getElementById("myCanvas");
-  var numPlayers = 1;
   var timerID;
   
-  var bomb = {
-    x: window.innerWidth / 2, y: window.innerHeight / 2,
-    maths: 2 * Math.PI, diameter: 40,
-    xVel: 0, yVel: 0, multiplier: 10
-  };
-  
-  var thisPlayer = {
-    x: 0, y: 0, size: 50
-  };
-  
-  var players = {thisPlayer};
-  
-  
-
+  var bomb;
+  var thisPlayer;
   var ctx;
+  
+  initObjects();
   init();
   
   function init(){
@@ -102,20 +91,24 @@
       bomb.yVel = Math.random() * -bomb.multiplier;
       console.log("Bottom of screen");
     }
-    if( !(( ( thisPlayer.y + thisPlayer.size ) < ( bomb.y ) ) ||
+    if( !(
+      ( ( thisPlayer.y + thisPlayer.size ) < ( bomb.y ) ) ||
   		( thisPlayer.y > ( bomb.y + bomb.diameter ) ) ||
   		( ( thisPlayer.x + thisPlayer.size ) < bomb.x ) ||
-  		( thisPlayer.x > ( bomb.x + bomb.diameter ) )) ) {
+  		( thisPlayer.x > ( bomb.x + bomb.diameter ) ) 
+  		) ) {
   		  //Game over
   		  clearInterval(timerID);
+  		  gameState.init = false;
   		  var playAgain = prompt("Play again?");
   		  if(playAgain == "yes"){
-  		    init;
+  		    initObjects();
+  		    init();
   		  } else {
   		    thisWindow = window.self;
   		    thisWindow.close();
   		  }
-  		}
+      }
   }
   
   function draw(){
@@ -131,6 +124,18 @@
     //This player
     ctx.fillStyle = "#FF0000"
     ctx.fillRect(thisPlayer.x - (thisPlayer.size / 2), thisPlayer.y - (thisPlayer.size / 2), thisPlayer.size, thisPlayer.size);
+  }
+  
+  function initObjects(){
+    bomb = {
+      x: window.innerWidth / 2, y: window.innerHeight / 2,
+      maths: 2 * Math.PI, diameter: 40,
+      xVel: 0, yVel: 0, multiplier: 10
+    };
+    
+    thisPlayer = {
+      x: 0, y: 0, size: 50
+    };
   }
     
   </script>
