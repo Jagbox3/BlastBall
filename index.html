@@ -23,6 +23,7 @@
   };
   var canvas = document.getElementById("myCanvas");
   var numPlayers = 1;
+  var timerID;
   
   var bomb = {
     x: window.innerWidth / 2, y: window.innerHeight / 2,
@@ -59,7 +60,7 @@
     bomb.yVel *= 10;
     
     //start game
-    var timerID = setInterval(function(){
+    timerID = setInterval(function(){
       manageHitboxes(players);
       moveCircle();
       draw();
