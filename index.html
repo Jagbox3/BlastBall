@@ -16,11 +16,7 @@
   Your browser does not support the HTML5 canvas tag.</canvas>
   
   <script>
-  var gameState = {
-    init: false,
-    over: false,
-    score: 0
-  };
+  var gameState;
   var canvas = document.getElementById("myCanvas");
   var timerID;
   
@@ -129,6 +125,11 @@
   }
   
   function initObjects(){
+    gameState = {
+      init: false,
+      over: false,
+      score: 0
+    };
     bomb = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
