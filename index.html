@@ -20,6 +20,11 @@
   var initialized = false;
 
   var canvas = document.getElementById("myCanvas");
+  
+  var timerID = setInterval(func(), 10);
+  var circle = {
+    x: window.innerWidth / 2, y: window.innerHeight / 2, maths: 2 * Math.PI
+  };
 
   var ctx;
   init();
@@ -32,6 +37,12 @@
     ctx = canvas.getContext("2d");
     ctx.fillStyle = "#C0C0C0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = "#0000FF";
+    ctx.beginPath();
+    ctx.arc(circle.x, circle.y, 10, 0, circle.maths);
+    ctx.fill();
+    ctx.closePath();
     
     initialized = true;
     console.log("Initialized");
@@ -47,6 +58,10 @@
       ctx.fillRect(event.clientX - 50, event.clientY - 50, 100, 100);
     }
 
+  }
+  
+  function moveCircle(){
+    
   }
     
   </script>
