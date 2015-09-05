@@ -33,12 +33,6 @@
     ctx.fillStyle = "#C0C0C0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    ctx.fillStyle = "#FF0000"
-    ctx.rect(50, 50, 100 , 100);
-    //ctx.beginPath();
-    //ctx.arc(50, 50, 50, 0, 2 * Math.PI);
-    //ctx.fill();
-    //ctx.closePath();
     initialized = true;
     alert("init");
   }
@@ -50,8 +44,7 @@
     if(initialized){
 
       ctx.fillStyle = "#FF0000"
-      ctx.rect(event.clientX - 50, event.clientY - 50, 100, 100);
-      ctx.fill();
+      ctx.fillRect(event.clientX - 50, event.clientY - 50, 100, 100);
     }
 
   }
