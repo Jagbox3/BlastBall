@@ -74,7 +74,7 @@
   
   function manageHitboxes(){
     if(bomb.x <= 0){ //Left
-      if(bomb.y >= sideM.ay || bomb.y <= window.innerHeight - sideM.ay){
+      if(bomb.y >= sideM.y || bomb.y <= window.innerHeight - sideM.y){
         bomb.xVel = bomb.maxVel;
         bomb.yVel = 0;
       } else {
@@ -88,7 +88,7 @@
       }
       
     } else if (bomb.x + (bomb.diameter/2) >= canvas.width){ //Right
-      if(bomb.y >= sideM.ay || bomb.y <= window.innerHeight - sideM.ay){
+      if(bomb.y >= sideM.y || bomb.y <= window.innerHeight - sideM.y){
           bombMovement(true);
       } else {
         bomb.xVel *= -1;
@@ -101,23 +101,33 @@
       }
     }
     if(bomb.y <= 0){ //Top
-      bomb.yVel *= -1;
-      if(bomb.xVel >= 0){
-        bomb.xVel += bomb.inc;
+      if(bomb.x >= sideM.x || bomb.x <= window.innerWidth - sideM.x){
+          bomb.yVel = -bomb.maxVel;
+          bomb.xVel = 0;
       } else {
-        bomb.xVel -= bomb.inc;
+        bomb.yVel *= -1;
+        if(bomb.xVel >= 0){
+          bomb.xVel += bomb.inc;
+        } else {
+          bomb.xVel -= bomb.inc;
+        }
+        bomb.maxVel += bomb.inc;
       }
-      bomb.maxVel += bomb.inc;
       
     } else if(bomb.y + (bomb.diameter/2) >= canvas.height){ //Bot
-      bomb.yVel *= -1;
-      if(bomb.xVel >= 0){
-        bomb.xVel += bomb.inc;
+      if(bomb.x >= sideM.x || bomb.x <= window.innerWidth - sideM.x){
+          bomb.x = window.innerWidth / 2;
+          bomb.y = window.innerHeight / 2,
+          bombMovement(false);
       } else {
-        bomb.xVel -= bomb.inc;
-      }
-      bomb.maxVel += bomb.inc;
-      
+        bomb.yVel *= -1;
+        if(bomb.xVel >= 0){
+          bomb.xVel += bomb.inc;
+        } else {
+          bomb.xVel -= bomb.inc;
+        }
+        bomb.maxVel += bomb.inc;
+        }
     }
     if( !(
       ( ( thisPlayer.y + thisPlayer.size ) < ( bomb.y ) ) ||
@@ -169,10 +179,8 @@
     };
     
     sideM = {
-      ax: window.innerWidth / 20,
-      bx: window.innerWidth - (window.innerWidth / 10),
-      ay: window.innerHeight / 20,
-      by: window.innerHeight - (window.innerWidth / 10)
+      x: (window.innerWidth - (window.innerWidth / 20)) / 2,
+      y: (window.innerHeight - (window.innerHeight / 20)) / 2,
     };
     
   }
@@ -189,6 +197,10 @@
       bomb.yVel = bomb.maxVel + bomb.xVel;
     } else {
     bomb.yVel = bomb.maxVel - bomb.xVel;
+    }
+    coin = Math.random();
+    if(coin > 0.5){
+    bomb.yVel *= -1;
     }
   }
     
