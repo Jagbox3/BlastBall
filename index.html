@@ -16,53 +16,66 @@
   Your browser does not support the HTML5 canvas tag.</canvas>
   
   <script>
-  
   var initialized = false;
-
   var canvas = document.getElementById("myCanvas");
+  var timerID = setInterval(looper(), 5);
   
-  //var timerID = setInterval(moveCircle(), 10);
-  
-  var circle = {
+  var bomb = {
     x: window.innerWidth / 2, y: window.innerHeight / 2, maths: 2 * Math.PI
   };
+  
+  var thisPlayer = {
+    x: 0, y: 0, size: 50
+  };
+  
+  
 
   var ctx;
   init();
   
   function init(){
+    //canvas init
     canvas.id     = "canvas";
     canvas.width  = window.innerWidth - 20;
     canvas.height = window.innerHeight - 20;
     document.body.appendChild(canvas);
     ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#C0C0C0";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    ctx.fillStyle = "#0000FF";
-    ctx.beginPath();
-    ctx.arc(circle.x, circle.y, 10, 0, circle.maths);
-    ctx.fill();
-    ctx.closePath();
+    draw();
     
     initialized = true;
     console.log("Initialized");
   }
 
   function move(event){
-    ctx.fillStyle = "#C0C0C0";
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillRect(0,0,canvas.width,canvas.height);
     if(initialized){
-
-      ctx.fillStyle = "#FF0000"
-      ctx.fillRect(event.clientX - 50, event.clientY - 50, 100, 100);
+      thisPlayer.x = event.clientX;
+      thisPlayer.y = event.clientY;
     }
 
   }
   
   function moveCircle(){
     
+  }
+  
+  function draw(){
+    //Grey Background
+    ctx.fillStyle = "#C0C0C0";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    //Bomb
+    ctx.fillStyle = "#0000FF";
+    ctx.beginPath();
+    ctx.arc(circle.x, circle.y, 10, 0, circle.maths);
+    ctx.fill();
+    ctx.closePath();
+    //This player
+    ctx.fillStyle = "#FF0000"
+    ctx.fillRect(event.clientX - 50, event.clientY - 50, 100, 100);
+  }
+  
+  function looper(){
+    moveCircle();
+    draw();
   }
     
   </script>
