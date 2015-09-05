@@ -41,7 +41,13 @@
     while(bomb.xVel > 0.75){
       bomb.xVel = Math.random();
     }
+    var coin = Math.random();
+    if(coin > 0.5){
+      bomb.xVel * -1;
+      bomb.yVel = bomb.maxVel + bomb.xVel;
+    } else {
     bomb.yVel = bomb.maxVel - bomb.xVel;
+    }
     
     //start game
     timerID = setInterval(function(){
