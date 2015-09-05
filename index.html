@@ -51,6 +51,7 @@
     
     //start game
     var timerID = setInterval(function(){
+      manageHitboxes();
       moveCircle();
       draw();
     }, 5);
