@@ -41,6 +41,7 @@
     while(bomb.xVel > 0.75){
       bomb.xVel = Math.random();
     }
+    bomb.xVel * bomb.maxVel;
     var coin = Math.random();
     if(coin > 0.5){
       bomb.xVel * -1;
@@ -85,39 +86,39 @@
     if(bomb.x <= 0){ //Left
       bomb.xVel *= -1;
       if(bomb.yVel >= 0){
-        bomb.yVel += 5;
+        bomb.yVel += bomb.inc;
       } else {
-        bomb.yVel -= 5;
+        bomb.yVel -= bomb.inc;
       }
-      bomb.maxVel += 5;
+      bomb.maxVel += bomb.inc;
       
     } else if (bomb.x + (bomb.diameter/2) >= canvas.width){ //Right
       bomb.xVel *= -1;
       if(bomb.yVel >= 0){
-        bomb.yVel += 5;
+        bomb.yVel += bomb.inc;
       } else {
-        bomb.yVel -= 5;
+        bomb.yVel -= bomb.inc;
       }
-      bomb.maxVel += 5;
+      bomb.maxVel += bomb.inc;
       
     }
     if(bomb.y <= 0){ //Top
       bomb.yVel *= -1;
       if(bomb.xVel >= 0){
-        bomb.xVel += 5;
+        bomb.xVel += bomb.inc;
       } else {
-        bomb.xVel -= 5;
+        bomb.xVel -= bomb.inc;
       }
-      bomb.maxVel += 5;
+      bomb.maxVel += bomb.inc;
       
     } else if(bomb.y + (bomb.diameter/2) >= canvas.height){ //Bot
       bomb.yVel *= -1;
       if(bomb.xVel >= 0){
-        bomb.xVel += 5;
+        bomb.xVel += bomb.inc;
       } else {
-        bomb.xVel -= 5;
+        bomb.xVel -= bomb.inc;
       }
-      bomb.maxVel += 5;
+      bomb.maxVel += bomb.inc;
       
     }
     if( !(
@@ -162,7 +163,7 @@
     bomb = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
-      xVel: 0, yVel: 0, maxVel
+      xVel: 0, yVel: 0, maxVel: 20, inc: 2
     };
     
     thisPlayer = {
