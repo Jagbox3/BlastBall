@@ -37,12 +37,11 @@
     draw();
     
     //init bomb movement
-    bomb.xVel = Math.random() * bomb.multiplier;
-    bomb.yVel = Math.random();
-    if(bomb.yVel <= .5){
-      bomb.yVel *= -1;
+    bomb.xVel = Math.random();
+    while(bomb.xVel > 0.75){
+      bomb.xVel = Math.random();
     }
-    bomb.yVel *= 10;
+    bomb.yVel = bomb.maxVel - bomb.xVel;
     
     //start game
     timerID = setInterval(function(){
@@ -77,19 +76,43 @@
   }
   
   function manageHitboxes(){
-    if(bomb.x <= 0){
-      bomb.xVel = Math.random() * bomb.multiplier;
-      console.log("Left of screen");
-    } else if (bomb.x + (bomb.diameter/2) >= canvas.width){
-      bomb.xVel = Math.random() * -bomb.multiplier;
-      console.log("Right of Screen");
+    if(bomb.x <= 0){ //Left
+      bomb.xVel *= -1;
+      if(bomb.yVel >= 0){
+        bomb.yVel += 5;
+      } else {
+        bomb.yVel -= 5;
+      }
+      bomb.maxVel += 5;
+      
+    } else if (bomb.x + (bomb.diameter/2) >= canvas.width){ //Right
+      bomb.xVel *= -1;
+      if(bomb.yVel >= 0){
+        bomb.yVel += 5;
+      } else {
+        bomb.yVel -= 5;
+      }
+      bomb.maxVel += 5;
+      
     }
-    if(bomb.y <= 0){
-      bomb.yVel = Math.random() * bomb.multiplier;
-      console.log("Top of screen");
-    } else if(bomb.y + (bomb.diameter/2) >= canvas.height){
-      bomb.yVel = Math.random() * -bomb.multiplier;
-      console.log("Bottom of screen");
+    if(bomb.y <= 0){ //Top
+      bomb.yVel *= -1;
+      if(bomb.xVel >= 0){
+        bomb.xVel += 5;
+      } else {
+        bomb.xVel -= 5;
+      }
+      bomb.maxVel += 5;
+      
+    } else if(bomb.y + (bomb.diameter/2) >= canvas.height){ //Bot
+      bomb.yVel *= -1;
+      if(bomb.xVel >= 0){
+        bomb.xVel += 5;
+      } else {
+        bomb.xVel -= 5;
+      }
+      bomb.maxVel += 5;
+      
     }
     if( !(
       ( ( thisPlayer.y + thisPlayer.size ) < ( bomb.y ) ) ||
@@ -97,7 +120,7 @@
   		( ( thisPlayer.x + thisPlayer.size ) < bomb.x ) ||
   		( thisPlayer.x > ( bomb.x + bomb.diameter ) ) 
   		) ) {
-  		  //Game over
+  		  //Player touched circle
   		  clearInterval(timerID);
   		  gameState.init = false;
   		  var roundedScore = Math.round(gameState.score)
@@ -133,7 +156,7 @@
     bomb = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
-      xVel: 0, yVel: 0, multiplier: 25
+      xVel: 0, yVel: 0, maxVel
     };
     
     thisPlayer = {
