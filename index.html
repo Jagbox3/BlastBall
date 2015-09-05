@@ -73,15 +73,20 @@
   }
   
   function manageHitboxes(){
+    console.log("Managing");
     if(bomb.x <= 0){
       bomb.xVel = Math.random() * 5;
-    } else if (bomb.x + (bomb.size/2) >= canvas.width){
+      console.log("Left of screen");
+    } else if (bomb.x + (bomb.diameter/2) >= canvas.width){
       bomb.xVel = Math.random() * -5;
+      console.log("Right of Screen");
     }
     if(bomb.y <= 0){
       bomb.yVel = Math.random() * 5;
-    } else if(bomb.y + (bomb.size/2) >= canvas.height){
+      console.log("Top of screen");
+    } else if(bomb.y + (bomb.diameter/2) >= canvas.height){
       bomb.yVel = Math.random() * -5;
+      console.log("Bottom of screen");
     }
   }
   
