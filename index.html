@@ -35,7 +35,6 @@
     
     ctx.fillStyle = "#FF0000"
     ctx.rect(50, 50, 100 , 100);
-    ctx.stroke();
     //ctx.beginPath();
     //ctx.arc(50, 50, 50, 0, 2 * Math.PI);
     //ctx.fill();
@@ -46,6 +45,7 @@
 
   function move(event){
     ctx.fillStyle = "#C0C0C0";
+    ctx.clearRect(0,0,canvas.width,canvas.height);
     ctx.fillRect(0,0,canvas.width,canvas.height);
     if(initialized){
 
