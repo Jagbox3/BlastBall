@@ -100,13 +100,16 @@
   		  //Game over
   		  clearInterval(timerID);
   		  gameState.init = false;
-  		  var playAgain = prompt("Play again?");
-  		  if(playAgain == "yes"){
-  		    initObjects();
-  		    init();
-  		  } else {
-  		    thisWindow = window.self;
-  		    thisWindow.close();
+  		  var playAgain = false;
+  		  while(!playAgain){
+    		  playAgain = confirm("Play again?");
+    		  if(playAgain == true){
+    		    initObjects();
+    		    init();
+    		  } else {
+    		    thisWindow = window.self;
+    		    thisWindow.close();
+    		  }
   		  }
       }
   }
