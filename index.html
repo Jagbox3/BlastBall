@@ -40,7 +40,11 @@
     document.body.appendChild(canvas);
     ctx = canvas.getContext("2d");
     draw();
-    var timerID = setInterval(looper(), 5);
+    var timerID = setInterval(function(){
+      moveCircle();
+      draw();
+      console.log("looped");
+    }, 5);
     
     initialized = true;
     console.log("Initialized");
@@ -71,12 +75,6 @@
     //This player
     ctx.fillStyle = "#FF0000"
     ctx.fillRect(thisPlayer.x, thisPlayer.y, thisPlayer.size, thisPlayer.size);
-  }
-  
-  function looper(){
-    moveCircle();
-    draw();
-    console.log("looped");
   }
     
   </script>
