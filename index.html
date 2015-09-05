@@ -20,7 +20,7 @@
   var canvas = document.getElementById("myCanvas");
   
   var bomb = {
-    x: window.innerWidth / 2, y: window.innerHeight / 2, maths: 2 * Math.PI, diameter: 40, direction: 0, xVel: 0, yVel: 0
+    x: window.innerWidth / 2, y: window.innerHeight / 2, maths: 2 * Math.PI, diameter: 40, direction: 0, xVel: 0, yVel: 0, multiplier: 10
   };
   
   var thisPlayer = {
@@ -42,12 +42,12 @@
     draw();
     
     //init bomb movement
-    bomb.xVel = Math.random() * 5;
+    bomb.xVel = Math.random() * bomb.multiplier;
     bomb.yVel = Math.random();
     if(bomb.yVel <= .5){
       bomb.yVel *= -1;
     }
-    bomb.yVel *= 5;
+    bomb.yVel *= 10;
     
     //start game
     var timerID = setInterval(function(){
@@ -75,17 +75,17 @@
   function manageHitboxes(){
     console.log("Managing");
     if(bomb.x <= 0){
-      bomb.xVel = Math.random() * 5;
+      bomb.xVel = Math.random() * bomb.multiplier;
       console.log("Left of screen");
     } else if (bomb.x + (bomb.diameter/2) >= canvas.width){
-      bomb.xVel = Math.random() * -5;
+      bomb.xVel = Math.random() * -bomb.multiplier;
       console.log("Right of Screen");
     }
     if(bomb.y <= 0){
-      bomb.yVel = Math.random() * 5;
+      bomb.yVel = Math.random() * bomb.multiplier;
       console.log("Top of screen");
     } else if(bomb.y + (bomb.diameter/2) >= canvas.height){
-      bomb.yVel = Math.random() * -5;
+      bomb.yVel = Math.random() * -bomb.multiplier;
       console.log("Bottom of screen");
     }
   }
