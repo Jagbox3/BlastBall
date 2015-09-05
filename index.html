@@ -45,15 +45,14 @@
   }
 
   function move(event){
-    if(initialized === true){
-      alert("hi");
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = "#C0C0C0";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    if(initialized){
 
-    ctx.fillStyle = "#FF0000"
-    ctx.rect(event.clientX - 50, event.clientY - 50, 100, 100);
-    ctx.fill();
-}
-alert("moved");
+      ctx.fillStyle = "#FF0000"
+      ctx.rect(event.clientX - 50, event.clientY - 50, 100, 100);
+      ctx.fill();
+    }
 
   }
     
