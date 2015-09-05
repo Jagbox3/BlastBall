@@ -20,7 +20,7 @@
   var canvas = document.getElementById("myCanvas");
   
   var bomb = {
-    x: window.innerWidth / 2, y: window.innerHeight / 2, maths: 2 * Math.PI, diameter: 40
+    x: window.innerWidth / 2, y: window.innerHeight / 2, maths: 2 * Math.PI, diameter: 40, direction: 0, xVel: 0, yVel: 0
   };
   
   var thisPlayer = {
@@ -40,6 +40,11 @@
     document.body.appendChild(canvas);
     ctx = canvas.getContext("2d");
     draw();
+    
+    //init bomb movement
+    bomb.direction = Math.random() * 360;
+    
+    //start game
     var timerID = setInterval(function(){
       moveCircle();
       draw();
