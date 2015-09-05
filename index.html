@@ -20,7 +20,7 @@
   var canvas = document.getElementById("myCanvas");
   
   var bomb = {
-    x: window.innerWidth / 2, y: window.innerHeight / 2, maths: 2 * Math.PI
+    x: window.innerWidth / 2, y: window.innerHeight / 2, maths: 2 * Math.PI, diameter: 40
   };
   
   var thisPlayer = {
@@ -69,7 +69,7 @@
     //Bomb
     ctx.fillStyle = "#0000FF";
     ctx.beginPath();
-    ctx.arc(bomb.x, bomb.y, 10, 0, bomb.maths);
+    ctx.arc(bomb.x, bomb.y, bomb.diameter, 0, bomb.maths);
     ctx.fill();
     ctx.closePath();
     //This player
