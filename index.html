@@ -17,6 +17,8 @@
   
   <script>
   
+  var initalized = false;
+
   var canvas = document.getElementById("myCanvas");
 
   var ctx;
@@ -39,15 +41,17 @@
     //ctx.arc(50, 50, 50, 0, 2 * Math.PI);
     //ctx.fill();
     //ctx.closePath();
+    initialized = true;
   }
 
   function move(event){
-
+    if(initialized){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     ctx.fillStyle = "#FF0000"
     ctx.rect(event.clientX - 50, event.clientY - 50, 100, 100);
     ctx.fill();
+}
 
   }
     
