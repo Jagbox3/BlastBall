@@ -18,14 +18,19 @@
   <script>
   var initialized = false;
   var canvas = document.getElementById("myCanvas");
+  var numPlayers = 1;
   
   var bomb = {
-    x: window.innerWidth / 2, y: window.innerHeight / 2, maths: 2 * Math.PI, diameter: 40, direction: 0, xVel: 0, yVel: 0, multiplier: 10
+    x: window.innerWidth / 2, y: window.innerHeight / 2,
+    maths: 2 * Math.PI, diameter: 40,
+    xVel: 0, yVel: 0, multiplier: 10
   };
   
   var thisPlayer = {
     x: 0, y: 0, size: 50
   };
+  
+  var players = {thisPlayer};
   
   
 
@@ -51,7 +56,7 @@
     
     //start game
     var timerID = setInterval(function(){
-      manageHitboxes();
+      manageHitboxes(players);
       moveCircle();
       draw();
     }, 5);
@@ -72,8 +77,7 @@
     bomb.y += bomb.yVel;
   }
   
-  function manageHitboxes(){
-    console.log("Managing");
+  function manageHitboxes(player){
     if(bomb.x <= 0){
       bomb.xVel = Math.random() * bomb.multiplier;
       console.log("Left of screen");
@@ -87,6 +91,14 @@
     } else if(bomb.y + (bomb.diameter/2) >= canvas.height){
       bomb.yVel = Math.random() * -bomb.multiplier;
       console.log("Bottom of screen");
+    }
+    for(i = 0; i < numPlayers; i++){
+    if(( ( player.y + player.size ) < ( bomb.y ) ) ||
+  		( player.y > ( bomb.y + bomb.diameter ) ) ||
+  		( ( player.x + player.size ) < bomb.x ) ||
+  		( player.x > ( bomb.x + bomb.diameter ) )) {
+  		  
+  		}
     }
   }
   
