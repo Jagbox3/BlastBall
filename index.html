@@ -19,7 +19,7 @@
   var gameState = {
     init: false,
     over: false,
-    time: 0
+    score: 0
   };
   var canvas = document.getElementById("myCanvas");
   var timerID;
@@ -61,7 +61,7 @@
   }
   
   function timeCounter(){
-    gameState.time += .1;
+    gameState.score += .1;
   }
 
   function move(event){ //Player movement
@@ -100,8 +100,8 @@
   		  //Game over
   		  clearInterval(timerID);
   		  gameState.init = false;
-  		  var roundedTime = Math.round(gameState.time)
-    		var playAgain = confirm("Your time was " + roundedTime + ". Play again?");
+  		  var roundedScore = Math.round(gameState.score)
+    		var playAgain = confirm("Your time was " + roundedScore + ". Play again?");
     		if(playAgain){
     		  initObjects();
     		  init();
