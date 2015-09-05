@@ -61,7 +61,7 @@
   }
   
   function timeCounter(){
-    time += .1;
+    gameState.time += .1;
   }
 
   function move(event){ //Player movement
@@ -100,17 +100,12 @@
   		  //Game over
   		  clearInterval(timerID);
   		  gameState.init = false;
-  		  var playAgain = false;
-  		  while(!playAgain){
-    		  playAgain = confirm("Play again?");
-    		  if(playAgain == true){
-    		    initObjects();
-    		    init();
-    		  } else {
-    		    thisWindow = window.self;
-    		    thisWindow.close();
-    		  }
-  		  }
+  		  var roundedTime = Math.round(gameState.time)
+    		var playAgain = confirm("Your time was " + roundedTime + ". Play again?");
+    		if(playAgain){
+    		  initObjects();
+    		  init();
+    		}
       }
   }
   
