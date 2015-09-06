@@ -24,9 +24,6 @@
   var thisPlayer;
   var ctx;
   var sideM;
-  var id;
-  var tempX;
-  var tempY;
   
   initObjects();
   init();
@@ -108,31 +105,16 @@
     }
     if(bomb.y <= 0){ //Top
       if(bomb.x >= sideM.x && bomb.x <= window.innerWidth - sideM.x){
-        if(bomb.xVel > 0){
-          bomb.xVel += 10;
-        } else {
-          bomb.xVel -= 10;
+        bomb.yVel = Math.random();
+        while(bomb.yVel > 0.75){
+          bomb.yVel = Math.random();
         }
-        if(bomb.yVel > 0){
-          bomb.yVel += 10;
-        } else {
-          bomb.yVel -= 10;
+        bomb.yVel * bomb.maxVel;
+        bomb.xVel = bomb.maxVel - bomb.yVel;
+        var neg = Math.random();
+        if(neg >= 0.5){
+          bomb.xVel *= -1;
         }
-        
-        tempX = bomb.xVel;
-        tempY = bomb.yVel;
-        
-        bomb.xVel = 0;
-        bomb.yVel = 0;
-        
-        id = setTimeout(function(){
-          bomb.xVel = tempX;
-          bomb.yVel = -tempY;
-          tempX = 0;
-          bomb.x = window.innerWidth;
-          bomb.y = window.innerHeight;
-          console.log("xVel: " + bomb.xVel + ", yVel: " + bomb.yVel);
-        }, 100);
         
       } else {
         bomb.yVel *= -1;
