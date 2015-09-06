@@ -157,10 +157,17 @@
       gameState.init = false;
       canvas.height = 0;
       canvas.width = 0;
-      var para = document.createElement("P");
-      var t = document.createTextNode("Score: " + gameState.score);
-      para.appendChild(t);
+      //Create Score Text
+      var scoreP = document.createElement("P");
+      var scoreText = document.createTextNode("Score: " + gameState.score);
+      scoreP.appendChild(scoreText);
       document.body.appendChild(para);
+      //Create Restart Game button
+      var restartBtn = document.createElement("BUTTON");
+      var btnText = document.createTextNode("Play Again?");
+      restartBtn.appendChild(btnTxt);
+      document.body.appendChild(restartBtn);
+      restartBtn.onclick = init();
     }
   }
   
