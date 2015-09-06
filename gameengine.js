@@ -10,10 +10,8 @@ var bomb; var bomb2; var bomb3;
 
 var bombs = new Array(3);
 
-initObjects();
-init();
-
 function init(){
+  initObjects();
   //canvas init
   canvas.id     = "canvas";
   canvas.width  = window.innerWidth - 20;
@@ -116,7 +114,6 @@ function manageHitboxes(){
   		  var roundedScore = Math.round(gameState.score);
     		var playAgain = confirm("Your score was " + roundedScore + ". Play again?");
     		if(playAgain){
-    		  initObjects();
     		  init();
     		}
     }
@@ -157,7 +154,7 @@ function checkIfEnded(){
     var btnText = document.createTextNode("Play Again?");
     restartBtn.appendChild(btnTxt);
     document.body.appendChild(restartBtn);
-    restartBtn.onclick = init();
+    restartBtn.onclick = reinit();
   }
 }
 
@@ -217,4 +214,9 @@ function bombMovement(rightWall){
     bombs[i].yVel *= -1;
     }
   }
+}
+function reinit(){
+  init();
+  var btn = document.getElementById("BUTTON");
+  document.body.removeChild(btn);
 }
