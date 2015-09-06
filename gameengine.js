@@ -198,15 +198,15 @@ function bombMovement(rightWall){
   }
 }
 function reinit(){
-  init();
   var btn = document.getElementById("BUTTON");
   document.body.removeChild(btn);
+  document.body.appendChild(canvas);
+  init();
 }
 function ended(){
   clearInterval(timerID);
     gameState.init = false;
-    canvas.height = 0;
-    canvas.width = 0;
+    document.body.removeChild(canvas);
     //Create Score Text
     var scoreP = document.createElement("P");
     var roundedScore = Math.round(gameState.score);
