@@ -118,10 +118,6 @@
       }
       bomb.maxVel += bomb.inc;
     }
-    if(bomb.x < 200 - bomb.diameter && bomb.y > canvas.height - 200){
-      bomb.x = Math.random() * canvas.width;
-      bomb.y = Math.random() * canvas.height;
-    }
     if( !(
       ( ( thisPlayer.y + thisPlayer.size ) < ( bomb.y ) ) ||
   		( thisPlayer.y > ( bomb.y + bomb.diameter ) ) ||
@@ -144,9 +140,6 @@
     //Grey Background
     ctx.fillStyle = "#C0C0C0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    //TP ZONE
-    ctx.fillStyle = "#33CC33";
-    ctx.fillRect(0, canvas.height-200, 200, 200);
     //Bomb
     ctx.fillStyle = "#0000FF";
     ctx.beginPath();
@@ -159,13 +152,13 @@
   }
   
   function checkIfEnded(){
-    if(bomb.maxVel > 200){
+    if(bomb.maxVel > 125){
       clearInterval(timerID);
       gameState.init = false;
       canvas.height = 0;
       canvas.width = 0;
-      var para = document.body.createElement("P");
-      var t = document.body.createTextNode("Score: " + gameState.score);
+      var para = document.createElement("P");
+      var t = document.createTextNode("Score: " + gameState.score);
       para.appendChild(t);
       document.body.appendChild(para);
     }
