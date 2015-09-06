@@ -102,8 +102,20 @@
     }
     if(bomb.y <= 0){ //Top
       if(bomb.x >= sideM.x || bomb.x <= window.innerWidth - sideM.x){
-          bomb.yVel = -bomb.maxVel;
-          bomb.xVel = 0;
+          var quarters = Math.random();
+          if(quarters <= 0.25){
+            bomb.x = 50;
+            bomb.y = 50;
+          } else if (quarters > 0.25 && quarters <= 0.5){
+            bomb.x = window.innerWidth - 50 - bomb.diameter;
+            bomb.y = 50;
+          } else if (quarters > 0.5 && quarters <= 0.75){
+            bomb.x = window.innerWidth - 50 - bomb.diameter;
+            bomb.y = window.innerHeight - 50 - bomb.diameter;
+          } else {
+            bomb.x = 50;
+            bomb.y = window.innerHeight - 50 - bomb.diameter;
+          }
       } else {
         bomb.yVel *= -1;
         if(bomb.xVel >= 0){
@@ -138,7 +150,7 @@
   		  //Player touched circle
   		  clearInterval(timerID);
   		  gameState.init = false;
-  		  var roundedScore = Math.round(gameState.score)
+  		  var roundedScore = Math.round(gameState.score);
     		var playAgain = confirm("Your score was " + roundedScore + ". Play again?");
     		if(playAgain){
     		  initObjects();
