@@ -106,13 +106,7 @@ function manageHitboxes(){
   		( thisPlayer.x > ( bombs[i].x + bombs[i].diameter ) ) 
   		) ) {
   		  //Player touched circle
-  		  clearInterval(timerID);
-  		  gameState.init = false;
-  		  var roundedScore = Math.round(gameState.score);
-    		var playAgain = confirm("Your score was " + roundedScore + ". Play again?");
-    		if(playAgain){
-    		  ended();
-    		}
+  		  ended();
     }
   }
 }
@@ -216,7 +210,7 @@ function ended(){
     //Create Restart Game button
     
     var restartBtn = document.createElement("input");
-    restartBtn.type = button;
+    restartBtn.type = "button";
     restartBtn.onclick = reinit;
     restartBtn.value = "Restart Game";
     document.body.appendChild(restartBtn);
