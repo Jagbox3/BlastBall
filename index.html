@@ -129,6 +129,8 @@
           bomb.xVel = tempX;
           bomb.yVel = -tempY;
           tempX = 0;
+          bomb.x = window.innerWidth;
+          bomb.y = window.innerHeight;
           console.log("xVel: " + bomb.xVel + ", yVel: " + bomb.yVel);
         }, 100);
         
