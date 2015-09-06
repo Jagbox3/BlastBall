@@ -38,7 +38,7 @@
     ctx = canvas.getContext("2d");
     draw();
     
-    //init bombs[i] movement
+    //init bomb movement
     bombMovement();
     
     //start game
@@ -93,7 +93,7 @@
         
       } else if (bombs[i].x + (bombs[i].diameter/2) >= canvas.width){ //Right
         if(bombs[i].y >= sideM.y && bombs[i].y <= window.innerHeight - sideM.y){
-            bombs[i]Movement(true);
+            bombMovement(true);
         } else {
           bombs[i].xVel *= -1;
           if(bombs[i].yVel >= 0){
