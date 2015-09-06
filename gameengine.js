@@ -214,9 +214,12 @@ function ended(){
     scoreP.appendChild(scoreText);
     document.body.appendChild(scoreP);
     //Create Restart Game button
-    var restartBtn = document.createElement("BUTTON");
-    var btnText = document.createTextNode("Play Again?");
-    restartBtn.appendChild(btnTxt);
+    
+    <input id="startbtn" type="button" onclick="init()" value="Start Here!">
+    
+    var restartBtn = document.createElement("input");
+    restartBtn.type = button;
+    restartBtn.onclick = reinit;
+    restartBtn.value = "Restart Game";
     document.body.appendChild(restartBtn);
-    restartBtn.onclick = reinit();
 }
