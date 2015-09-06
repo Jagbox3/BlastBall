@@ -1,5 +1,5 @@
 var gameState;
-var canvas = document.getElementById("myCanvas");
+var canvas = document.createElement("canvas");
 var timerID;
 
 var thisPlayer;
@@ -16,6 +16,7 @@ function init(){
   canvas.id     = "canvas";
   canvas.width  = window.innerWidth - 20;
   canvas.height = window.innerHeight - 20;
+  canvas.onmousemove = move(event);
   document.body.appendChild(canvas);
   ctx = canvas.getContext("2d");
   draw();
