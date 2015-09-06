@@ -24,7 +24,9 @@
   var ctx;
   var sideM;
   
-  var bombs = [bomb, bomb1, bombs2];
+  var bomb; var bomb2; var bombs3;
+  
+  var bombs = [bomb, bomb2, bombs3];
   
   initObjects();
   init();
@@ -184,17 +186,17 @@
       over: false,
       score: 0
     };
-    bombs[0] = {
+    bomb = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
       xVel: 0, yVel: 0, maxVel: 20, inc: 0.1
     };
-    bombs[1] = {
+    bomb2 = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
       xVel: 0, yVel: 0, maxVel: 20, inc: 0.1
     };
-    bombs[2] = {
+    bomb3 = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
       xVel: 0, yVel: 0, maxVel: 20, inc: 0.1
