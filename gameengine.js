@@ -213,5 +213,6 @@ function ended(){
     restartBtn.type = "button";
     restartBtn.onclick = reinit;
     restartBtn.value = "Restart Game";
+    restartBtn.id = "input";
     document.body.appendChild(restartBtn);
 }
