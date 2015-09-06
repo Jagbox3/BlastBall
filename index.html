@@ -46,9 +46,6 @@
       moveCircle();
       draw();
       timeCounter();
-      if(tempX == 0 && tempY != 0){
-        clearTimeout(id);
-      }
     }, 5);
     
     gameState.init = true;
@@ -105,40 +102,25 @@
     }
     if(bomb.y <= 0){ //Top
       if(bomb.x >= sideM.x && bomb.x <= window.innerWidth - sideM.x){
-        bomb.yVel = Math.random();
-        while(bomb.yVel > 0.75){
-          bomb.yVel = Math.random();
-        }
-        bomb.yVel * bomb.maxVel;
-        bomb.xVel = bomb.maxVel - bomb.yVel;
-        var neg = Math.random();
-        if(neg >= 0.5){
-          bomb.xVel *= -1;
-        }
-        
+      bomb.yVel *= -1;
+      if(bomb.xVel >= 0){
+        bomb.xVel += bomb.inc;
       } else {
-        bomb.yVel *= -1;
-        if(bomb.xVel >= 0){
-          bomb.xVel += bomb.inc;
-        } else {
-          bomb.xVel -= bomb.inc;
-        }
-        bomb.maxVel += bomb.inc;
+        bomb.xVel -= bomb.inc;
       }
+      bomb.maxVel += bomb.inc;
     } else if(bomb.y + (bomb.diameter/2) >= canvas.height){ //Bot
-      if(bomb.x >= sideM.x && bomb.x <= window.innerWidth - sideM.x){
-          bomb.x = window.innerWidth / 2;
-          bomb.y = window.innerHeight / 2,
-          bombMovement(false);
+      bomb.yVel *= -1;
+      if(bomb.xVel >= 0){
+        bomb.xVel += bomb.inc;
       } else {
-        bomb.yVel *= -1;
-        if(bomb.xVel >= 0){
-          bomb.xVel += bomb.inc;
-        } else {
-          bomb.xVel -= bomb.inc;
-        }
-        bomb.maxVel += bomb.inc;
-        }
+        bomb.xVel -= bomb.inc;
+      }
+      bomb.maxVel += bomb.inc;
+    }
+    if(bomb.x < 200 - bomb.diameter && bomb.y > canvas.height - 200){
+      bomb.x = Math.random() * canvas.width;
+      bomb.y = Math.random() * canvas.height;
     }
     if( !(
       ( ( thisPlayer.y + thisPlayer.size ) < ( bomb.y ) ) ||
@@ -162,6 +144,9 @@
     //Grey Background
     ctx.fillStyle = "#C0C0C0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    //TP ZONE
+    ctx.fillStyle = "#33CC33";
+    ctx.fillRect(0, canvas.height-200, 200, 200);
     //Bomb
     ctx.fillStyle = "#0000FF";
     ctx.beginPath();
