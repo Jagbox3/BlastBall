@@ -10,9 +10,13 @@ var bomb; var bomb2; var bomb3;
 
 var bombs = new Array(3);
 
-function init(){
+function start(){
   var startbtn = document.getElementById("startbtn");
   document.body.removeChild(startbtn);
+  init();
+}
+
+function init(){
   document.body.appendChild(canvas);
   initObjects();
   //canvas init
