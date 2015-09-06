@@ -65,9 +65,6 @@ function moveCircle(){ //bombs[i] movement
 
 function manageHitboxes(){
   for(var i = 0; i < 3; i++){
-    if(bombs[i].xVel < 5 && bombs[i].xVel > -5){
-      bombMovement();
-    }
     if(bombs[i].x <= 0){ //Left
       bombs[i].xVel *= -1;
       if(bombs[i].yVel >= 0){
