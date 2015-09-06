@@ -146,9 +146,9 @@
     //Grey Background
     ctx.fillStyle = "#C0C0C0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    //bombs[i]
-    ctx.fillStyle = "#0000FF";
+    //bombs
     for(var i = 0; i < 3; i++){
+      ctx.fillStyle = bombs[i].color;
       ctx.beginPath();
       ctx.arc(bombs[i].x, bombs[i].y, bombs[i].diameter, 0, bombs[i].maths);
       ctx.fill();
@@ -189,17 +189,17 @@
     bomb = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
-      xVel: 0, yVel: 0, maxVel: 20, inc: 0.1
+      xVel: 0, yVel: 0, maxVel: 20, inc: 0.1, color: "#FF0000"
     };
     bomb2 = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
-      xVel: 0, yVel: 0, maxVel: 20, inc: 0.1
+      xVel: 0, yVel: 0, maxVel: 10, inc: 0.1, color: "#00CCFF"
     };
     bomb3 = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
-      xVel: 0, yVel: 0, maxVel: 20, inc: 0.1
+      xVel: 0, yVel: 0, maxVel: 5, inc: 0.1, color:"#FF9900"
     };
     
     bombs[0] = bomb;
