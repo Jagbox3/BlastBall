@@ -122,7 +122,7 @@
         bomb.yVel = 0;
         
         var id = setTimeout(function(){
-          console.log("unfreezing");
+          console.log("xVel: " + bomb.xVel + ", yVel: " + bomb.yVel);
           bomb.xVel = tempX;
           bomb.yVel = -tempY;
           bomb.maxVel += 30;
