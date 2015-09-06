@@ -101,16 +101,13 @@
       }
     }
     if(bomb.y <= 0){ //Top
-      if(bomb.x >= sideM.x && bomb.x <= window.innerWidth - sideM.x){
-        bomb.yVel *= -1;
-        if(bomb.xVel >= 0){
-          bomb.xVel += bomb.inc;
-        } else {
-          bomb.xVel -= bomb.inc;
-        }
+      bomb.yVel *= -1;
+      if(bomb.xVel >= 0){
+        bomb.xVel += bomb.inc;
       } else {
-      bomb.maxVel += bomb.inc;
+        bomb.xVel -= bomb.inc;
       }
+      bomb.maxVel += bomb.inc;
     } else if(bomb.y + (bomb.diameter/2) >= canvas.height){ //Bot
       bomb.yVel *= -1;
       if(bomb.xVel >= 0){
