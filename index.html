@@ -46,6 +46,7 @@
       moveCircle();
       draw();
       timeCounter();
+      checkIfEnded();
     }, 5);
     
     gameState.init = true;
@@ -157,6 +158,19 @@
     ctx.fillRect(thisPlayer.x - (thisPlayer.size / 2), thisPlayer.y - (thisPlayer.size / 2), thisPlayer.size, thisPlayer.size);
   }
   
+  function checkIfEnded(){
+    if(bomb.maxVel > 200){
+      clearInterval(timerID);
+      gameState.init = false;
+      canvas.height = 0;
+      canvas.width = 0;
+      var para = document.body.createElement("P");
+      var t = document.body.createTextNode("Score: " + gameState.score);
+      para.appendChild(t);
+      document.body.appendChild(para);
+    }
+  }
+  
   function initObjects(){
     gameState = {
       init: false,
@@ -166,7 +180,7 @@
     bomb = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
-      xVel: 0, yVel: 0, maxVel: 5, inc: 0.2
+      xVel: 0, yVel: 0, maxVel: 20, inc: 0.1
     };
     
     thisPlayer = {
