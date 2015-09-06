@@ -102,20 +102,32 @@
     }
     if(bomb.y <= 0){ //Top
       if(bomb.x >= sideM.x && bomb.x <= window.innerWidth - sideM.x){
-          var quarters = Math.random();
-          if(quarters <= 0.25){
-            bomb.x = 50;
-            bomb.y = 50;
-          } else if (quarters > 0.25 && quarters <= 0.5){
-            bomb.x = window.innerWidth - 50 - bomb.diameter;
-            bomb.y = 50;
-          } else if (quarters > 0.5 && quarters <= 0.75){
-            bomb.x = window.innerWidth - 50 - bomb.diameter;
-            bomb.y = window.innerHeight - 50 - bomb.diameter;
-          } else {
-            bomb.x = 50;
-            bomb.y = window.innerHeight - 50 - bomb.diameter;
-          }
+        var tempX;
+        var tempY;
+        if(bomb.xVel > 0){
+          bomb.xVel += 10;
+        } else {
+          bomb.xVel -= 10;
+        }
+        if(bomb.yVel > 0){
+          bomb.yVel += 10;
+        } else {
+          bomb.yVel -= 10;
+        }
+        
+        tempX = bomb.xVel;
+        tempY = bomb.yVel;
+        
+        bomb.xVel = 0;
+        bomb.yVel = 0;
+        
+        var id = setTimeout(function(){
+          bomb.xVel = tempX;
+          bomb.yVel = tempY;
+          bomb.maxVel += 30;
+          clearTimeout(id);
+        }, 50);
+        
       } else {
         bomb.yVel *= -1;
         if(bomb.xVel >= 0){
@@ -125,7 +137,6 @@
         }
         bomb.maxVel += bomb.inc;
       }
-      
     } else if(bomb.y + (bomb.diameter/2) >= canvas.height){ //Bot
       if(bomb.x >= sideM.x && bomb.x <= window.innerWidth - sideM.x){
           bomb.x = window.innerWidth / 2;
