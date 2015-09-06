@@ -1,6 +1,5 @@
 var gameState;
 var canvas = document.createElement("canvas");
-document.body.appendChild(canvas);
 var timerID;
 
 var thisPlayer;
@@ -12,12 +11,13 @@ var bomb; var bomb2; var bomb3;
 var bombs = new Array(3);
 
 function init(){
+  document.body.appendChild(canvas);
   initObjects();
   //canvas init
   canvas.id     = "canvas";
   canvas.width  = window.innerWidth - 20;
   canvas.height = window.innerHeight - 20;
-  canvas.onmousemove = "move(event)";
+  canvas.onmousemove = move;
   ctx = canvas.getContext("2d");
   draw();
   
