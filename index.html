@@ -121,13 +121,21 @@
         bomb.xVel = 0;
         bomb.yVel = 0;
         
+        var i = 0;
+        
         var id = setTimeout(function(){
           bomb.xVel = tempX;
           bomb.yVel = -tempY;
           console.log("xVel: " + bomb.xVel + ", yVel: " + bomb.yVel);
-          bomb.maxVel += 30;
+          i++;
         }, 2);
-        clearTimeout(id);
+        
+        while(i < 2000){
+          if (i > 1800){
+            i = 2000;
+            clearTimeout(id);
+          }
+        }
         
       } else {
         bomb.yVel *= -1;
