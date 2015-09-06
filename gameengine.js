@@ -198,7 +198,7 @@ function bombMovement(rightWall){
 function reinit(){
   var btn = document.getElementById("input");
   document.body.removeChild(btn);
-  var scoreP = document.getElementById("P");
+  var scoreP = document.getElementById("scoreP");
   document.body.removeChild(scoreP);
   init();
 }
@@ -208,6 +208,7 @@ function ended(){
     document.body.removeChild(canvas);
     //Create Score Text
     var scoreP = document.createElement("P");
+    scoreP.id = "scoreP";
     var roundedScore = Math.round(gameState.score);
     var scoreText = document.createTextNode("Score: " + roundedScore);
     scoreP.appendChild(scoreText);
