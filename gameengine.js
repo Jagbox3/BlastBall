@@ -193,8 +193,7 @@ function bombMovement(rightWall){
 }
 function reinit(){
   var btn = document.getElementById("BUTTON");
-  btn.value = "";
-  document.body.removeChild(btn);
+  document.removeChild(btn);
   document.body.appendChild(canvas);
   init();
 }
