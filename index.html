@@ -122,12 +122,12 @@
         bomb.yVel = 0;
         
         var id = setTimeout(function(){
-          console.log("xVel: " + bomb.xVel + ", yVel: " + bomb.yVel);
           bomb.xVel = tempX;
           bomb.yVel = -tempY;
+          console.log("xVel: " + bomb.xVel + ", yVel: " + bomb.yVel);
           bomb.maxVel += 30;
-          clearTimeout(id);
         }, 2);
+        clearTimeout(id);
         
       } else {
         bomb.yVel *= -1;
