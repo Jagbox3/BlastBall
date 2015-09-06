@@ -27,9 +27,6 @@
   var bomb; var bomb2; var bomb3;
   
   var bombs = new Array(3);
-  bombs[0] = bomb;
-  bombs[1] = bomb2;
-  bombs[2] = bomb3;
   
   initObjects();
   init();
@@ -204,6 +201,10 @@
       maths: 2 * Math.PI, diameter: 40,
       xVel: 0, yVel: 0, maxVel: 20, inc: 0.1
     };
+    
+    bombs[0] = bomb;
+    bombs[1] = bomb2;
+    bombs[2] = bomb3;
     
     thisPlayer = {
       x: 0, y: 0, size: 50
