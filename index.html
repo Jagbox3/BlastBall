@@ -20,10 +20,11 @@
   var canvas = document.getElementById("myCanvas");
   var timerID;
   
-  var bomb;
   var thisPlayer;
   var ctx;
   var sideM;
+  
+  var bombs = [bomb, bomb1, bombs2];
   
   initObjects();
   init();
@@ -37,7 +38,7 @@
     ctx = canvas.getContext("2d");
     draw();
     
-    //init bomb movement
+    //init bombs[i] movement
     bombMovement();
     
     //start game
@@ -57,7 +58,6 @@
     gameState.score += .1;
     if(gameState.score % 25 <= 0.2 && thisPlayer.size <= 120){
       thisPlayer.size += 1;
-      console.log("howdy");
     }
   }
 
@@ -68,71 +68,75 @@
     }
   }
   
-  function moveCircle(){ //Bomb movement
-    bomb.x += bomb.xVel;
-    bomb.y += bomb.yVel;
+  function moveCircle(){ //bombs[i] movement
+    for(int i = 0; i < 3; i++){
+      bombs[i].x += bombs[i].xVel;
+      bombs[i].y += bombs[i].yVel;
+    }
   }
   
   function manageHitboxes(){
-    if(bomb.x <= 0){ //Left
-      if(bomb.y >= sideM.y && bomb.y <= window.innerHeight - sideM.y){
-        bomb.xVel = bomb.maxVel;
-        bomb.yVel = 0;
-      } else {
-        bomb.xVel *= -1;
-        if(bomb.yVel >= 0){
-          bomb.yVel += bomb.inc;
+    for(int i = 0; i < 3; i++){
+      if(bombs[i].x <= 0){ //Left
+        if(bombs[i].y >= sideM.y && bombs[i].y <= window.innerHeight - sideM.y){
+          bombs[i].xVel = bombs[i].maxVel;
+          bombs[i].yVel = 0;
         } else {
-          bomb.yVel -= bomb.inc;
+          bombs[i].xVel *= -1;
+          if(bombs[i].yVel >= 0){
+            bombs[i].yVel += bombs[i].inc;
+          } else {
+            bombs[i].yVel -= bombs[i].inc;
+          }
+          bombs[i].maxVel += bombs[i].inc;
         }
-        bomb.maxVel += bomb.inc;
-      }
-      
-    } else if (bomb.x + (bomb.diameter/2) >= canvas.width){ //Right
-      if(bomb.y >= sideM.y && bomb.y <= window.innerHeight - sideM.y){
-          bombMovement(true);
-      } else {
-        bomb.xVel *= -1;
-        if(bomb.yVel >= 0){
-          bomb.yVel += bomb.inc;
+        
+      } else if (bombs[i].x + (bombs[i].diameter/2) >= canvas.width){ //Right
+        if(bombs[i].y >= sideM.y && bombs[i].y <= window.innerHeight - sideM.y){
+            bombs[i]Movement(true);
         } else {
-          bomb.yVel -= bomb.inc;
+          bombs[i].xVel *= -1;
+          if(bombs[i].yVel >= 0){
+            bombs[i].yVel += bombs[i].inc;
+          } else {
+            bombs[i].yVel -= bombs[i].inc;
+          }
+          bombs[i].maxVel += bombs[i].inc;
         }
-        bomb.maxVel += bomb.inc;
       }
-    }
-    if(bomb.y <= 0){ //Top
-      bomb.yVel *= -1;
-      if(bomb.xVel >= 0){
-        bomb.xVel += bomb.inc;
-      } else {
-        bomb.xVel -= bomb.inc;
+      if(bombs[i].y <= 0){ //Top
+        bombs[i].yVel *= -1;
+        if(bombs[i].xVel >= 0){
+          bombs[i].xVel += bombs[i].inc;
+        } else {
+          bombs[i].xVel -= bombs[i].inc;
+        }
+        bombs[i].maxVel += bombs[i].inc;
+      } else if(bombs[i].y + (bombs[i].diameter/2) >= canvas.height){ //Bot
+        bombs[i].yVel *= -1;
+        if(bombs[i].xVel >= 0){
+          bombs[i].xVel += bombs[i].inc;
+        } else {
+          bombs[i].xVel -= bombs[i].inc;
+        }
+        bombs[i].maxVel += bombs[i].inc;
       }
-      bomb.maxVel += bomb.inc;
-    } else if(bomb.y + (bomb.diameter/2) >= canvas.height){ //Bot
-      bomb.yVel *= -1;
-      if(bomb.xVel >= 0){
-        bomb.xVel += bomb.inc;
-      } else {
-        bomb.xVel -= bomb.inc;
+      if( !(
+        ( ( thisPlayer.y + thisPlayer.size ) < ( bombs[i].y ) ) ||
+    		( thisPlayer.y > ( bombs[i].y + bombs[i].diameter ) ) ||
+    		( ( thisPlayer.x + thisPlayer.size ) < bombs[i].x ) ||
+    		( thisPlayer.x > ( bombs[i].x + bombs[i].diameter ) ) 
+    		) ) {
+    		  //Player touched circle
+    		  clearInterval(timerID);
+    		  gameState.init = false;
+    		  var roundedScore = Math.round(gameState.score);
+      		var playAgain = confirm("Your score was " + roundedScore + ". Play again?");
+      		if(playAgain){
+      		  initObjects();
+      		  init();
+      		}
       }
-      bomb.maxVel += bomb.inc;
-    }
-    if( !(
-      ( ( thisPlayer.y + thisPlayer.size ) < ( bomb.y ) ) ||
-  		( thisPlayer.y > ( bomb.y + bomb.diameter ) ) ||
-  		( ( thisPlayer.x + thisPlayer.size ) < bomb.x ) ||
-  		( thisPlayer.x > ( bomb.x + bomb.diameter ) ) 
-  		) ) {
-  		  //Player touched circle
-  		  clearInterval(timerID);
-  		  gameState.init = false;
-  		  var roundedScore = Math.round(gameState.score);
-    		var playAgain = confirm("Your score was " + roundedScore + ". Play again?");
-    		if(playAgain){
-    		  initObjects();
-    		  init();
-    		}
     }
   }
   
@@ -140,26 +144,29 @@
     //Grey Background
     ctx.fillStyle = "#C0C0C0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    //Bomb
+    //bombs[i]
     ctx.fillStyle = "#0000FF";
-    ctx.beginPath();
-    ctx.arc(bomb.x, bomb.y, bomb.diameter, 0, bomb.maths);
-    ctx.fill();
-    ctx.closePath();
+    for(int i = 0; i < 3; i++){
+      ctx.beginPath();
+      ctx.arc(bombs[i].x, bombs[i].y, bombs[i].diameter, 0, bombs[i].maths);
+      ctx.fill();
+      ctx.closePath();
+    }
     //This player
     ctx.fillStyle = "#FF0000"
     ctx.fillRect(thisPlayer.x - (thisPlayer.size / 2), thisPlayer.y - (thisPlayer.size / 2), thisPlayer.size, thisPlayer.size);
   }
   
   function checkIfEnded(){
-    if(bomb.maxVel > 125){
+    if(bombs[2].maxVel > 125){
       clearInterval(timerID);
       gameState.init = false;
       canvas.height = 0;
       canvas.width = 0;
       //Create Score Text
       var scoreP = document.createElement("P");
-      var scoreText = document.createTextNode("Score: " + gameState.score);
+      var roundedScore = Math.round(gameState.score);
+      var scoreText = document.createTextNode("Score: " + roundedScore);
       scoreP.appendChild(scoreText);
       document.body.appendChild(scoreP);
       //Create Restart Game button
@@ -177,7 +184,17 @@
       over: false,
       score: 0
     };
-    bomb = {
+    bombs[0] = {
+      x: window.innerWidth / 2, y: window.innerHeight / 2,
+      maths: 2 * Math.PI, diameter: 40,
+      xVel: 0, yVel: 0, maxVel: 20, inc: 0.1
+    };
+    bombs[1] = {
+      x: window.innerWidth / 2, y: window.innerHeight / 2,
+      maths: 2 * Math.PI, diameter: 40,
+      xVel: 0, yVel: 0, maxVel: 20, inc: 0.1
+    };
+    bombs[2] = {
       x: window.innerWidth / 2, y: window.innerHeight / 2,
       maths: 2 * Math.PI, diameter: 40,
       xVel: 0, yVel: 0, maxVel: 20, inc: 0.1
@@ -193,23 +210,25 @@
     };
     
   }
-  function bombMovement(rightWall){
-    bomb.xVel = Math.random();
-    while(bomb.xVel > 0.75){
-      bomb.xVel = Math.random();
-    }
-    bomb.xVel * bomb.maxVel * 5;
-    var coin = Math.random();
-    console.log(coin);
-    if(coin > 0.5 || rightWall){
-      bomb.xVel *= -1;
-      bomb.yVel = bomb.maxVel + bomb.xVel;
-    } else {
-    bomb.yVel = bomb.maxVel - bomb.xVel;
-    }
-    coin = Math.random();
-    if(coin > 0.5){
-    bomb.yVel *= -1;
+  function bombs[i]Movement(rightWall){
+    for(int i = 0; i < 3; i++){
+      bombs[i]s[i].xVel = Math.random();
+      while(bombs[i].xVel > 0.75){
+        bombs[i]s[i].xVel = Math.random();
+      }
+      bombs[i].xVel * bombs[i].maxVel * 5;
+      var coin = Math.random();
+      console.log(coin);
+      if(coin > 0.5 || rightWall){
+        bombs[i].xVel *= -1;
+        bombs[i].yVel = bombs[i].maxVel + bombs[i].xVel;
+      } else {
+      bombs[i].yVel = bombs[i].maxVel - bombs[i].xVel;
+      }
+      coin = Math.random();
+      if(coin > 0.5){
+      bombs[i].yVel *= -1;
+      }
     }
   }
     
