@@ -74,7 +74,7 @@
   
   function manageHitboxes(){
     if(bomb.x <= 0){ //Left
-      if(bomb.y >= sideM.y || bomb.y <= window.innerHeight - sideM.y){
+      if(bomb.y >= sideM.y && bomb.y <= window.innerHeight - sideM.y){
         bomb.xVel = bomb.maxVel;
         bomb.yVel = 0;
       } else {
@@ -88,7 +88,7 @@
       }
       
     } else if (bomb.x + (bomb.diameter/2) >= canvas.width){ //Right
-      if(bomb.y >= sideM.y || bomb.y <= window.innerHeight - sideM.y){
+      if(bomb.y >= sideM.y && bomb.y <= window.innerHeight - sideM.y){
           bombMovement(true);
       } else {
         bomb.xVel *= -1;
@@ -101,7 +101,7 @@
       }
     }
     if(bomb.y <= 0){ //Top
-      if(bomb.x >= sideM.x || bomb.x <= window.innerWidth - sideM.x){
+      if(bomb.x >= sideM.x && bomb.x <= window.innerWidth - sideM.x){
           var quarters = Math.random();
           if(quarters <= 0.25){
             bomb.x = 50;
@@ -127,7 +127,7 @@
       }
       
     } else if(bomb.y + (bomb.diameter/2) >= canvas.height){ //Bot
-      if(bomb.x >= sideM.x || bomb.x <= window.innerWidth - sideM.x){
+      if(bomb.x >= sideM.x && bomb.x <= window.innerWidth - sideM.x){
           bomb.x = window.innerWidth / 2;
           bomb.y = window.innerHeight / 2,
           bombMovement(false);
@@ -191,8 +191,8 @@
     };
     
     sideM = {
-      x: (window.innerWidth - (window.innerWidth / 20)) / 2,
-      y: (window.innerHeight - (window.innerHeight / 20)) / 2,
+      x: (window.innerWidth - (window.innerWidth / 10)) / 2,
+      y: (window.innerHeight - (window.innerHeight / 10)) / 2,
     };
     
   }
