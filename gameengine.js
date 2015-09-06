@@ -189,7 +189,7 @@ function bombMovement(rightWall){
     while(bombs[i].xVel > 0.75){
       bombs[i].xVel = Math.random();
     }
-    bombs[i].xVel * bombs[i].maxVel * 5;
+    bombs[i].xVel * bombs[i].maxVel;
     var coin = Math.random();
     console.log(coin);
     if(coin > 0.5 || rightWall){
