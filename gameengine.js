@@ -77,17 +77,13 @@ function manageHitboxes(){
       }
       bombs[i].maxVel += bombs[i].inc;
     } else if (bombs[i].x + (bombs[i].diameter/2) >= canvas.width){ //Right
-      if(bombs[i].y >= sideM.y && bombs[i].y <= window.innerHeight - sideM.y){
-          bombMovement(true);
+      bombs[i].xVel *= -1;
+      if(bombs[i].yVel >= 0){
+        bombs[i].yVel += bombs[i].inc;
       } else {
-        bombs[i].xVel *= -1;
-        if(bombs[i].yVel >= 0){
-          bombs[i].yVel += bombs[i].inc;
-        } else {
-          bombs[i].yVel -= bombs[i].inc;
-        }
-        bombs[i].maxVel += bombs[i].inc;
+        bombs[i].yVel -= bombs[i].inc;
       }
+      bombs[i].maxVel += bombs[i].inc;
     }
     if(bombs[i].y <= 0){ //Top
       bombs[i].yVel *= -1;
@@ -183,12 +179,12 @@ function initObjects(){
   };
   
 }
-function bombMovement(rightWall){
+function bombMovement(){
   for(var i = 0; i < 3; i++){
     bombs[i].xVel = Math.random() * bombs[i].maxVel;
     var coin = Math.random();
     console.log(coin);
-    if(coin > 0.5 || rightWall){
+    if(coin > 0.5){
       bombs[i].xVel *= -1;
       bombs[i].yVel = bombs[i].maxVel + bombs[i].xVel;
     } else {
