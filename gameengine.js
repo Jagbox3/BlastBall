@@ -133,7 +133,7 @@ function draw(){
 }
 
 function checkIfEnded(){
-  for(int i = 0; i < 3; i++){
+  for(var i = 0; i < 3; i++){
     if(bombs[i].maxVel > 75){
       bombs[i].maxVel = 10;
       bombs[i].diameter += 10;
