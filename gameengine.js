@@ -62,19 +62,13 @@ function moveCircle(){ //bombs[i] movement
 function manageHitboxes(){
   for(var i = 0; i < 3; i++){
     if(bombs[i].x <= 0){ //Left
-      if(bombs[i].y >= sideM.y && bombs[i].y <= window.innerHeight - sideM.y){
-        bombs[i].xVel = bombs[i].maxVel;
-        bombs[i].yVel = 0;
+      bombs[i].xVel *= -1;
+      if(bombs[i].yVel >= 0){
+        bombs[i].yVel += bombs[i].inc;
       } else {
-        bombs[i].xVel *= -1;
-        if(bombs[i].yVel >= 0){
-          bombs[i].yVel += bombs[i].inc;
-        } else {
-          bombs[i].yVel -= bombs[i].inc;
-        }
-        bombs[i].maxVel += bombs[i].inc;
+        bombs[i].yVel -= bombs[i].inc;
       }
-      
+      bombs[i].maxVel += bombs[i].inc;
     } else if (bombs[i].x + (bombs[i].diameter/2) >= canvas.width){ //Right
       if(bombs[i].y >= sideM.y && bombs[i].y <= window.innerHeight - sideM.y){
           bombMovement(true);
@@ -117,7 +111,7 @@ function manageHitboxes(){
   		  var roundedScore = Math.round(gameState.score);
     		var playAgain = confirm("Your score was " + roundedScore + ". Play again?");
     		if(playAgain){
-    		  init();
+    		  ended();
     		}
     }
   }
@@ -142,22 +136,7 @@ function draw(){
 
 function checkIfEnded(){
   if(bombs[2].maxVel > 125){
-    clearInterval(timerID);
-    gameState.init = false;
-    canvas.height = 0;
-    canvas.width = 0;
-    //Create Score Text
-    var scoreP = document.createElement("P");
-    var roundedScore = Math.round(gameState.score);
-    var scoreText = document.createTextNode("Score: " + roundedScore);
-    scoreP.appendChild(scoreText);
-    document.body.appendChild(scoreP);
-    //Create Restart Game button
-    var restartBtn = document.createElement("BUTTON");
-    var btnText = document.createTextNode("Play Again?");
-    restartBtn.appendChild(btnTxt);
-    document.body.appendChild(restartBtn);
-    restartBtn.onclick = reinit();
+    ended();
   }
 }
 
@@ -222,4 +201,22 @@ function reinit(){
   init();
   var btn = document.getElementById("BUTTON");
   document.body.removeChild(btn);
+}
+function ended(){
+  clearInterval(timerID);
+    gameState.init = false;
+    canvas.height = 0;
+    canvas.width = 0;
+    //Create Score Text
+    var scoreP = document.createElement("P");
+    var roundedScore = Math.round(gameState.score);
+    var scoreText = document.createTextNode("Score: " + roundedScore);
+    scoreP.appendChild(scoreText);
+    document.body.appendChild(scoreP);
+    //Create Restart Game button
+    var restartBtn = document.createElement("BUTTON");
+    var btnText = document.createTextNode("Play Again?");
+    restartBtn.appendChild(btnTxt);
+    document.body.appendChild(restartBtn);
+    restartBtn.onclick = reinit();
 }
