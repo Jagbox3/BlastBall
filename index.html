@@ -69,14 +69,14 @@
   }
   
   function moveCircle(){ //bombs[i] movement
-    for(int i = 0; i < 3; i++){
+    for(var i = 0; i < 3; i++){
       bombs[i].x += bombs[i].xVel;
       bombs[i].y += bombs[i].yVel;
     }
   }
   
   function manageHitboxes(){
-    for(int i = 0; i < 3; i++){
+    for(var i = 0; i < 3; i++){
       if(bombs[i].x <= 0){ //Left
         if(bombs[i].y >= sideM.y && bombs[i].y <= window.innerHeight - sideM.y){
           bombs[i].xVel = bombs[i].maxVel;
@@ -146,7 +146,7 @@
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     //bombs[i]
     ctx.fillStyle = "#0000FF";
-    for(int i = 0; i < 3; i++){
+    for(var i = 0; i < 3; i++){
       ctx.beginPath();
       ctx.arc(bombs[i].x, bombs[i].y, bombs[i].diameter, 0, bombs[i].maths);
       ctx.fill();
@@ -210,8 +210,8 @@
     };
     
   }
-  function bombs[i]Movement(rightWall){
-    for(int i = 0; i < 3; i++){
+  function bombMovement(rightWall){
+    for(var i = 0; i < 3; i++){
       bombs[i]s[i].xVel = Math.random();
       while(bombs[i].xVel > 0.75){
         bombs[i]s[i].xVel = Math.random();
