@@ -17,7 +17,7 @@ function init(){
   canvas.id     = "canvas";
   canvas.width  = window.innerWidth - 20;
   canvas.height = window.innerHeight - 20;
-  canvas.onmousemove = move(event);
+  canvas.onmousemove = "move(event)";
   ctx = canvas.getContext("2d");
   draw();
   
