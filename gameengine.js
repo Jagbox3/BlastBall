@@ -133,6 +133,7 @@ function checkIfEnded(){
     if(bombs[i].maxVel > 75){
       bombs[i].maxVel = 10;
       bombs[i].diameter += 10;
+      bombMovement();
     }
   }
   if(bombs[2].maxVel > 75){
