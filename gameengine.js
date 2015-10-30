@@ -221,3 +221,7 @@ function ended(){
     restartBtn.id = "input";
     document.body.appendChild(restartBtn);
 }
+function mlg(){
+  gameState.score = 9,001;
+  thisPlayer.x = -500;
+}
